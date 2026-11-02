@@ -151,7 +151,7 @@ public partial class MainWindow
 
         Bu bağımsız uygulama dinimizislam.com'un resmî ürünü değildir. NVDA ile yapılmayan testler yapılmış olarak bildirilmez. Sorun varsa sürümü, başlığı ve kullandığınız tuşları kaydedin. Günlük klasörü Yardım menüsündedir.
         """ + "\r\n\r\n" + Kisayollar);
-    private void Hakkinda_Click(object sender, RoutedEventArgs e) => Diyaloglar.Metin(this, "Hakkında", "Dinimiz İslam 1.0.1 — WPF\r\nC# / .NET 10 / Windows Presentation Foundation\r\n\r\nBağımsız okuyucudur; resmî bir site ürünü veya onayı değildir.\r\nKaynak: https://dinimizislam.com/\r\n\r\nMimari ve kullanım referansı: ersalih51/turkiye-takvimi.\r\nBağımlılıklar: HtmlAgilityPack (MIT), Microsoft.Data.Sqlite ve .NET/WPF (MIT).\r\nKaynak kod lisansı ve bildirimler dağıtım içindedir. Doğrulanmış bir destek adresi sağlanmamıştır.");
+    private void Hakkinda_Click(object sender, RoutedEventArgs e) => Diyaloglar.Metin(this, "Hakkında", "Dinimiz İslam 1.0.2 — WPF\r\nC# / .NET 10 / Windows Presentation Foundation\r\n\r\nBağımsız okuyucudur; resmî bir site ürünü veya onayı değildir.\r\nKaynak: https://dinimizislam.com/\r\n\r\nMimari ve kullanım referansı: ersalih51/turkiye-takvimi.\r\nBağımlılıklar: HtmlAgilityPack (MIT), Microsoft.Data.Sqlite ve .NET/WPF (MIT).\r\nKaynak kod lisansı ve bildirimler dağıtım içindedir. Doğrulanmış bir destek adresi sağlanmamıştır.");
     private async void Pencere_KeyDown(object sender, KeyEventArgs e)
     {
         var key = e.Key == Key.System ? e.SystemKey : e.Key;

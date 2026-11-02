@@ -1,6 +1,6 @@
 # Erişilebilirlik ve doğrulama
 
-## 1.0.1 — 2 Kasım 2026
+## 1.0.2 — 2 Kasım 2026
 
 38 çevrimdışı çekirdek testi geçti. Gerçek kaynak HTML örneklerinden ayrı geçici veritabanı kuran WPF navigasyon denetimi geçti. Kullanıcının gerçek verileri bu teste dahil edilmez.
 
@@ -8,7 +8,7 @@ Denetlenen akışlar: ana başlığın sabit kalması; kategori öğelerinin eri
 
 Bunlar uygulama içi WPF odak ve klavye olay/komut testleridir. Fiziksel tuş enjeksiyonu veya NVDA sesli kullanıcı testi değildir. Canlı bilgisayar denetimi erişim onayında zaman aşımına uğramıştır. NVDA 2025.3.3 ile sesli kabul testi tamamlanmış olarak bildirilmez.
 
-Önceki 1.0.0 teknik denetiminde uzun makale Windows UI Automation tarafından 519 görsel satır olarak algılandı; Microsoft Print to PDF çıktısı üretildi ve PDF yapısı doğrulandı. 1.0.1'de aynı yerel WPF TextBox ve yazdırma yolu korunur. PDF/UA uygunluğu doğrulanmadı.
+Önceki 1.0.0 teknik denetiminde uzun makale Windows UI Automation tarafından 519 görsel satır olarak algılandı; Microsoft Print to PDF çıktısı üretildi ve PDF yapısı doğrulandı. 1.0.2'de aynı yerel WPF TextBox ve yazdırma yolu korunur. PDF/UA uygunluğu doğrulanmadı.
 
 Bu çalışmada canlı arama sayfası 403 döndürdü. Uygulama site başlıklarını kategori sayfalarından toplar; erişim engelini aşmaz. Eksik taramada başarı veya tüm site tam metin araması iddiası göstermez. İlk dizin taraması zaman alabilir; sonraki arama yereldir. Başlık dizini ile yerel makale metni araması arasındaki kapsam yardımda açıklanır.
 

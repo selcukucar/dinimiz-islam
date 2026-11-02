@@ -1,5 +1,5 @@
 #ifndef Surum
-  #define Surum "1.0.1"
+  #define Surum "1.0.2"
 #endif
 #ifndef Yayin
   #define Yayin "..\portable"

@@ -6,8 +6,8 @@ Windows için C# / .NET 10 WPF okuyucusu. Klavye ile kategori dolaşımı ve sal
 
 Windows 10 2004 (19041) veya daha yeni, x64 gerekir. .NET çalışma zamanı paketin içindedir.
 
-- **Taşınabilir:** `DinimizIslam-WPF-1.0.1-Tasinabilir-x64.zip` arşivini tamamen çıkarıp `DinimizIslam.exe` çalıştırın.
-- **Kurulum:** `DinimizIslam-WPF-1.0.1-Kurulum-x64.exe` çalıştırın. Kurulum Türkçedir, yalnız geçerli kullanıcı içindir ve yönetici yetkisi istemez. Başlat menüsü kısayolu ve kaldırıcı oluşturur; masaüstü kısayolu isteğe bağlıdır.
+- **Taşınabilir:** `DinimizIslam-WPF-1.0.2-Tasinabilir-x64.zip` arşivini tamamen çıkarıp `DinimizIslam.exe` çalıştırın.
+- **Kurulum:** `DinimizIslam-WPF-1.0.2-Kurulum-x64.exe` çalıştırın. Kurulum Türkçedir, yalnız geçerli kullanıcı içindir ve yönetici yetkisi istemez. Başlat menüsü kısayolu ve kaldırıcı oluşturur; masaüstü kısayolu isteğe bağlıdır.
 - İki sürüm aynı yerel veri klasörünü kullanır: `%LOCALAPPDATA%\DinimizIslamOkuyucu`. Taşınabilir burada kurulum gerektirmeyen anlamındadır; ayarlar USB bellekte tutulmaz. Kaldırma yer imlerini ve önbelleği silmez.
 - Yayın dosyalarının SHA-256 değerleri `SHA256SUMS.txt` içindedir. Paketler kod imzalı değildir.
 
@@ -50,6 +50,6 @@ dotnet run --project src/DinimizIslam.Arayuz
 .\paket\paketle.ps1 -Iscc 'C:\Program Files (x86)\Inno Setup 6\ISCC.exe'
 ```
 
-Paketleme Inno Setup 6.7.4 veya uyumlu derleyici kullanır. `.github/workflows/release.yml`, `v1.0.1` gibi etiketlerde test ve paketleme yaparak GitHub Releases'e kurulum, taşınabilir ve kaynak dosyalarını ekler. [Yayın yönergesi](docs/GITHUB.md), [erişilebilirlik denetimi](docs/ERISILEBILIRLIK.md), [değişiklikler](CHANGELOG.md).
+Paketleme Inno Setup 6.7.4 veya uyumlu derleyici kullanır. `.github/workflows/release.yml`, `v1.0.2` gibi etiketlerde test ve paketleme yaparak GitHub Releases'e kurulum, taşınabilir ve kaynak dosyalarını ekler. [Yayın yönergesi](docs/GITHUB.md), [erişilebilirlik denetimi](docs/ERISILEBILIRLIK.md), [değişiklikler](CHANGELOG.md).
 
 MIT lisansı yalnız yazılım içindir; [bildirimleri](NOTICE.md) okuyun. Hata bildirirken sürüm, Windows/NVDA sürümü ve tekrarlanabilir tuş sırasını belirtin. Kişisel verilerinizi ve önbellek/veritabanınızı herkese açık depoya yüklemeyin.

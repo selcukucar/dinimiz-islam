@@ -1,6 +1,9 @@
 # Değişiklikler
 
-## 1.0.1
+## 1.0.2
+
+- Temiz GitHub Windows ortamındaki NU1004 hatası düzeltildi: win-x64 hedefi bütün projelerde sabitlendi, bağımlılık kilitleri aynı hedefle yeniden üretildi.
+
 
 - Enter ile arama site başlıklarını ve yerel metinleri tarar; boş önbellekte başlık dizini oluşturur. Sonuç sayısı ve eksik tarama bildirilir.
 - Menü çubuğu Tab sırasından çıkarıldı; Alt/F10 erişimi korunur. Durum alanına F4 ile erişilir.

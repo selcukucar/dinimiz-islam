@@ -15,7 +15,7 @@ try
         var child = await service.Kategoriler(root.Veri[0].Url, true, default);
         var article = await service.Makale(Ayristirici.AnaSayfa + "detay.asp?Aid=4764", true, default);
         var calendar = await service.Imsakiye("", true, default);
-        var report = new { Surum = "1.0.1 WPF", Tarih = DateTimeOffset.Now, AnaKategoriler = root.Veri.Count,
+        var report = new { Surum = "1.0.2 WPF", Tarih = DateTimeOffset.Now, AnaKategoriler = root.Veri.Count,
             AltKategoriOgeleri = child.Veri.Count, Makale = article.Veri.Title, Paragraflar = article.Veri.Paragraphs.Count,
             MakaleKarakterleri = article.Veri.Text.Length, ImsakiyeYili = calendar.Veri.Year, ImsakiyeGunleri = calendar.Veri.Rows.Count };
         var json = JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping });

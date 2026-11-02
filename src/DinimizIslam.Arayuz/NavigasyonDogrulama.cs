@@ -18,7 +18,7 @@ public partial class MainWindow
         Directory.CreateDirectory(cikti);
         if (File.Exists(Path.Combine(cikti, "veriler.sqlite3"))) throw new IOException("Test için yeni bir klasör seçin.");
         Environment.SetEnvironmentVariable("DI_TEST_DATA", cikti);
-        var report = new Dictionary<string, object?> { ["Surum"] = "1.0.1", ["Tarih"] = DateTimeOffset.Now,
+        var report = new Dictionary<string, object?> { ["Surum"] = "1.0.2", ["Tarih"] = DateTimeOffset.Now,
             ["Yontem"] = "Gerçek kaynak HTML örnekleriyle WPF odak dolaşımı ve komut/olay işleyicisi regresyon denetimi; fiziksel NVDA testi değildir." };
         MainWindow? w = null;
         void Kontrol(string ad, bool dogru) { report[ad] = dogru; if (!dogru) throw new InvalidOperationException(ad); }

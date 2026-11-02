@@ -14,7 +14,7 @@ public static class PaketDogrulama
 {
     public static async Task<int> Calistir(string klasor)
     {
-        Directory.CreateDirectory(klasor); var report = new Dictionary<string, object?> { ["Surum"] = "1.0.1 WPF", ["Tarih"] = DateTimeOffset.Now };
+        Directory.CreateDirectory(klasor); var report = new Dictionary<string, object?> { ["Surum"] = "1.0.2 WPF", ["Tarih"] = DateTimeOffset.Now };
         Window? window = null;
         try
         {

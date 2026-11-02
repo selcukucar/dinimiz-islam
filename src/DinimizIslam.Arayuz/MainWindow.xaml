@@ -1,0 +1,141 @@
+﻿<Window x:Class="DinimizIslam.Arayuz.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Dinimiz İslam"
+        Width="1000" Height="850" MinWidth="640" MinHeight="540" FontSize="16"
+        FontFamily="Segoe UI Variable Text, Segoe UI" WindowStartupLocation="CenterScreen"
+        PreviewKeyDown="Pencere_KeyDown" Loaded="Pencere_Loaded" Closing="Pencere_Closing">
+  <DockPanel>
+    <Menu x:Name="AnaMenu" DockPanel.Dock="Top" KeyboardNavigation.TabNavigation="None" IsTabStop="False">
+      <MenuItem Header="_Dosya">
+        <MenuItem Header="Makale _adresi aç…" InputGestureText="Ctrl+O" Click="Adres_Click"/>
+        <Separator/><MenuItem Header="_Yazdır…" InputGestureText="Ctrl+P" Click="Yazdir_Click"/>
+        <MenuItem Header="_PDF olarak kaydet…" InputGestureText="Ctrl+Shift+S" Click="Pdf_Click"/>
+        <Separator/><MenuItem Header="Çı_kış" InputGestureText="Alt+F4" Click="Cikis_Click"/>
+      </MenuItem>
+      <MenuItem x:Name="KonularMenusu" Header="_Konular">
+        <MenuItem Header="_Ana kategoriler" InputGestureText="Ctrl+2" Click="AnaKategoriler_Click"/>
+        <MenuItem Header="Kategorileri _yenile" Click="KategoriYenile_Click"/><Separator/>
+      </MenuItem>
+      <MenuItem Header="_Görünüm">
+        <MenuItem Header="_Konular" InputGestureText="Ctrl+2" Click="Konular_Click"/>
+        <MenuItem Header="_Makale okuyucu" InputGestureText="Ctrl+4" Click="Okuyucu_Click"/>
+        <MenuItem Header="_Arama" InputGestureText="Ctrl+3" Click="Arama_Click"/>
+        <MenuItem Header="İ_msakiye" InputGestureText="Ctrl+5" Click="Imsakiye_Click"/>
+        <MenuItem Header="_Yer imleri" InputGestureText="Ctrl+B" Click="YerImleri_Click"/>
+        <MenuItem Header="_Son okunanlar" Click="Gecmis_Click"/><Separator/>
+        <MenuItem Header="_Geri" InputGestureText="Alt+Sol" Click="Geri_Click"/>
+        <MenuItem Header="Y_enile" InputGestureText="Ctrl+R" Click="Yenile_Click"/>
+        <Separator/><MenuItem Header="Yazıyı _büyüt" InputGestureText="Ctrl+Artı" Click="Buyut_Click"/>
+        <MenuItem Header="Yazıyı _küçült" InputGestureText="Ctrl+Eksi" Click="Kucult_Click"/>
+        <MenuItem Header="_Normal yazı boyutu" InputGestureText="Ctrl+0" Click="NormalBoyut_Click"/>
+      </MenuItem>
+      <MenuItem Header="A_yarlar"><MenuItem Header="_Genel ayarlar…" InputGestureText="Ctrl+Virgül" Click="Ayarlar_Click"/></MenuItem>
+      <MenuItem Header="Yar_dım">
+        <MenuItem Header="_Kullanım kılavuzu" InputGestureText="F1" Click="Yardim_Click"/>
+        <MenuItem Header="Klavye kı_sayolları" InputGestureText="F2" Click="Kisayollar_Click"/>
+        <MenuItem Header="Son işlem _durumu" InputGestureText="F4" Click="Durum_Click"/>
+        <Separator/><MenuItem Header="_Hakkında" Click="Hakkinda_Click"/><MenuItem Header="Günlük _klasörünü aç" Click="Gunluk_Click"/>
+      </MenuItem>
+    </Menu>
+    <Border DockPanel.Dock="Bottom" BorderThickness="0,1,0,0" Padding="16,7" BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}">
+      <DockPanel><Button x:Name="IptalDugmesi" DockPanel.Dock="Right" Content="İptal" IsEnabled="False" Click="Iptal_Click" Margin="12,0,0,0" Padding="16,4"/>
+        <TextBox x:Name="DurumKutusu" IsReadOnly="True" IsReadOnlyCaretVisible="True" BorderThickness="0" Background="Transparent"
+                 AutomationProperties.Name="Son işlem durumu" AutomationProperties.LiveSetting="Polite" IsTabStop="False" Text="Hazır."/>
+      </DockPanel>
+    </Border>
+    <TabControl x:Name="Sekmeler" Margin="12,8,12,0" SelectionChanged="Sekmeler_Changed" AutomationProperties.Name="Bölümler" KeyboardNavigation.TabNavigation="Local">
+      <TabItem Header="Konular" Padding="14,9">
+        <Grid Margin="12,12,12,8"><Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+          <Border Style="{StaticResource Kart}" Margin="0,0,0,12"><StackPanel>
+            <TextBlock x:Name="KategoriBasligi" Text="Konular ve kategoriler" FontSize="26" FontWeight="SemiBold" TextWrapping="Wrap"/>
+            <TextBlock x:Name="KategoriAltBilgi" Text="Başlığı oklarla seçin, Enter ile açın. Alt+Sol üst kategoriye döner." TextWrapping="Wrap" Margin="0,4,0,0"/>
+          </StackPanel></Border>
+          <DockPanel Grid.Row="1" Margin="0,0,0,10"><Label Content="Başlıklarda _ara" Target="{Binding ElementName=KategoriArama}"/>
+            <TextBox x:Name="KategoriArama" Padding="9,6" TextChanged="KategoriArama_Changed" PreviewKeyDown="KategoriArama_KeyDown" AutomationProperties.Name="Kategori ve konu başlıklarında ara"/>
+          </DockPanel>
+          <ListBox x:Name="KategoriListesi" Grid.Row="2" BorderThickness="0" Background="Transparent"
+                   ItemContainerStyle="{StaticResource BaslikOgesi}" ItemTemplate="{StaticResource BaslikSablonu}"
+                   AutomationProperties.Name="Kategoriler ve konular" PreviewKeyDown="Liste_KeyDown" MouseDoubleClick="Liste_DoubleClick"
+                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" KeyboardNavigation.TabNavigation="Once"/>
+          <WrapPanel Grid.Row="3" Margin="0,10,0,0">
+            <Button Content="Üst kategoriye dön" Click="UstKategori_Click"/><Button Content="Ana kategoriler" Click="AnaKategoriler_Click"/>
+            <Button Content="Seçili başlığı aç" Click="BaslikAc_Click"/><Button Content="Özgün sayfayı aç" Click="KategoriKaynak_Click"/>
+          </WrapPanel>
+        </Grid>
+      </TabItem>
+      <TabItem Header="Okuyucu" Padding="14,9">
+        <Grid Margin="12,12,12,8"><Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+          <Border Margin="0,0,0,12" CornerRadius="12" Padding="18,12" Background="{DynamicResource AccentFillColorDefaultBrush}">
+            <TextBlock x:Name="MakaleBasligi" Text="Makale okuyucu" FontSize="26" FontWeight="SemiBold" TextWrapping="Wrap"
+                       Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+          </Border>
+          <TextBox x:Name="MakaleKutusu" Grid.Row="1" Style="{StaticResource Okuma}" AutomationProperties.Name="Salt okunur makale metni"
+                   Text="Konulardan bir makale seçin veya Ctrl+O ile makale adresi açın."/>
+          <WrapPanel Grid.Row="2" Margin="0,10,0,0">
+            <Button Content="Başlıklara dön" Click="Geri_Click"/><Button Content="Yer imi ekle / kaldır" Click="YerImiDegistir_Click"/>
+            <Button Content="Metni kopyala" Click="MetniKopyala_Click"/><Button Content="Bağlantılar" Click="Baglantilar_Click"/>
+            <Button Content="Kaynak bilgisi" Click="KaynakBilgisi_Click"/><Button Content="Sitede aç" Click="MakaleKaynak_Click"/>
+            <Button Content="Yazdır" Click="Yazdir_Click"/><Button Content="PDF kaydet" Click="Pdf_Click"/>
+          </WrapPanel>
+        </Grid>
+      </TabItem>
+      <TabItem Header="Arama" Padding="14,9">
+        <Grid Margin="12,12,12,8"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+          <TextBlock x:Name="AramaBilgi" AutomationProperties.LiveSetting="Polite" Text="Site başlıkları ve kaydedilmiş makale metinleri aranır. İlk aramada başlık dizini hazırlanır; Escape ile iptal edebilirsiniz." TextWrapping="Wrap" Margin="0,0,0,12"/>
+          <DockPanel Grid.Row="1" Margin="0,0,0,10"><Label Content="_Aranacak metin" Target="{Binding ElementName=AramaKutusu}"/>
+            <Button DockPanel.Dock="Right" Content="Ara" Click="Ara_Click" Margin="10,0,0,0"/>
+            <Button DockPanel.Dock="Right" Content="Başlık dizinini yenile" Click="AramaDiziniYenile_Click" Margin="10,0,0,0"/>
+            <TextBox x:Name="AramaKutusu" Padding="9,6" AutomationProperties.Name="Site başlıklarında ve yerel metinlerde ara" PreviewKeyDown="Arama_KeyDown"/>
+          </DockPanel>
+          <ListBox x:Name="SonucListesi" Grid.Row="2" AutomationProperties.Name="Arama sonuçları" ItemContainerStyle="{StaticResource BaslikOgesi}"
+                   KeyboardNavigation.TabNavigation="Once" ItemTemplate="{StaticResource BaslikSablonu}" PreviewKeyDown="Liste_KeyDown" MouseDoubleClick="Liste_DoubleClick"/>
+        </Grid>
+      </TabItem>
+      <TabItem Header="İmsakiye" Padding="14,9">
+        <Grid Margin="12,12,12,8"><Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+          <WrapPanel><Label Content="_Şehir" Target="{Binding ElementName=SehirKutusu}"/>
+            <ComboBox x:Name="SehirKutusu" MinWidth="220" DisplayMemberPath="Ad" SelectedValuePath="Kod" SelectionChanged="Sehir_Changed" DropDownClosed="Sehir_Kapandi" AutomationProperties.Name="İmsakiye şehri" Margin="4,0,16,8"/>
+            <Label Content="Kaynak yılı" Target="{Binding ElementName=YilKutusu}"/>
+            <TextBox x:Name="YilKutusu" IsReadOnly="True" IsReadOnlyCaretVisible="True" Width="90" Padding="8,6" AutomationProperties.Name="Kaynakta yayımlanan yıl" Margin="4,0,16,8"/>
+            <Button Content="Yenile" Click="ImsakiyeYenile_Click"/>
+          </WrapPanel>
+          <TextBlock x:Name="ImsakiyeBilgi" Grid.Row="1" Text="Yalnız kaynağın yayımladığı yıl gösterilir; vakit hesaplanmaz." TextWrapping="Wrap" Margin="0,4,0,10"/>
+          <DockPanel Grid.Row="2" Margin="0,0,0,10"><Label Content="_Tarih süz" Target="{Binding ElementName=TarihSuz}"/>
+            <TextBox x:Name="TarihSuz" Padding="8,6" AutomationProperties.Name="İmsakiyede tarih süz" TextChanged="TarihSuz_Changed"/>
+          </DockPanel>
+          <DataGrid x:Name="ImsakiyeTablosu" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False"
+                    CanUserDeleteRows="False" SelectionUnit="CellOrRowHeader" SelectionMode="Single" HeadersVisibility="All"
+                    AutomationProperties.Name="İmsakiye vakitleri" KeyboardNavigation.TabNavigation="Once" RowHeight="36">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Ramazan" Binding="{Binding Gun}"/>
+              <DataGridTextColumn Header="Tarih" Binding="{Binding Tarih}"/>
+              <DataGridTextColumn Header="İmsak" Binding="{Binding Imsak}"/>
+              <DataGridTextColumn Header="Sabah" Binding="{Binding Sabah}"/>
+              <DataGridTextColumn Header="Güneş" Binding="{Binding Gunes}"/>
+              <DataGridTextColumn Header="Öğle" Binding="{Binding Ogle}"/>
+              <DataGridTextColumn Header="İkindi" Binding="{Binding Ikindi}"/>
+              <DataGridTextColumn Header="Akşam" Binding="{Binding Aksam}"/>
+              <DataGridTextColumn Header="Yatsı" Binding="{Binding Yatsi}"/>
+            </DataGrid.Columns>
+          </DataGrid>
+          <StackPanel Grid.Row="4" Margin="0,10,0,0"><TextBox x:Name="ImsakiyeNotlari" Style="{StaticResource Okuma}" MaxHeight="100" FontSize="14" AutomationProperties.Name="İmsakiye kaynak açıklamaları"/>
+            <WrapPanel Margin="0,8,0,0"><Button Content="Yazdır" Click="Yazdir_Click"/><Button Content="PDF kaydet" Click="Pdf_Click"/><Button Content="Özgün sayfayı aç" Click="ImsakiyeKaynak_Click"/></WrapPanel>
+          </StackPanel>
+        </Grid>
+      </TabItem>
+      <TabItem Header="Yer imleri" Padding="14,9">
+        <DockPanel Margin="12,12,12,8"><WrapPanel DockPanel.Dock="Bottom" Margin="0,10,0,0">
+          <Button Content="Seçili makaleyi aç" Click="YerImiAc_Click"/><Button Content="Seçili yer imini kaldır" Click="YerImiSil_Click"/>
+        </WrapPanel><ListBox x:Name="YerImiListesi" AutomationProperties.Name="Yer imleri" ItemContainerStyle="{StaticResource BaslikOgesi}"
+                             KeyboardNavigation.TabNavigation="Once" ItemTemplate="{StaticResource BaslikSablonu}" PreviewKeyDown="Liste_KeyDown" MouseDoubleClick="Liste_DoubleClick"/></DockPanel>
+      </TabItem>
+      <TabItem Header="Geçmiş" Padding="14,9"><ListBox x:Name="GecmisListesi" Margin="12,12,12,8" AutomationProperties.Name="Son okunan makaleler"
+          ItemContainerStyle="{StaticResource BaslikOgesi}" KeyboardNavigation.TabNavigation="Once" ItemTemplate="{StaticResource BaslikSablonu}" PreviewKeyDown="Liste_KeyDown" MouseDoubleClick="Liste_DoubleClick"/></TabItem>
+    </TabControl>
+  </DockPanel>
+</Window>

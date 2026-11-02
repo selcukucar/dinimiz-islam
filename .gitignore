@@ -1,0 +1,8 @@
+**/bin/
+**/obj/
+portable/
+artifacts/
+.vs/
+*.user
+*.sqlite3*
+*.log

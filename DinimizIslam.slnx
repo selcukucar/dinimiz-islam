@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/DinimizIslam.Cekirdek/DinimizIslam.Cekirdek.csproj"/>
+  <Project Path="src/DinimizIslam.Arayuz/DinimizIslam.Arayuz.csproj"/>
+  <Project Path="src/DinimizIslam.Konsol/DinimizIslam.Konsol.csproj"/>
+  <Project Path="tests/DinimizIslam.Testler/DinimizIslam.Testler.csproj"/>
+</Solution>

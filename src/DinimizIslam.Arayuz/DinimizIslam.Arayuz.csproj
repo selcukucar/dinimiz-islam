@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <UseWPF>true</UseWPF><UseWindowsForms>true</UseWindowsForms>
+    <NoWarn>$(NoWarn);WPF0001</NoWarn>
+    <AssemblyName>DinimizIslam</AssemblyName><Product>Dinimiz İslam</Product>
+    <Description>Bağımsız, klavye ve ekran okuyucu odaklı Dinimiz İslam okuyucusu</Description>
+    <SatelliteResourceLanguages>tr</SatelliteResourceLanguages>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../DinimizIslam.Cekirdek/DinimizIslam.Cekirdek.csproj" />
+    <Using Remove="System.Windows.Forms"/><Using Remove="System.Drawing"/>
+  </ItemGroup>
+</Project>

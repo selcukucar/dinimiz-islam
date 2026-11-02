@@ -1,0 +1,32 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Style x:Key="Kart" TargetType="Border">
+    <Setter Property="CornerRadius" Value="10"/><Setter Property="Padding" Value="16,12"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}"/>
+  </Style>
+  <Style x:Key="Okuma" TargetType="TextBox">
+    <Setter Property="IsReadOnly" Value="True"/><Setter Property="IsReadOnlyCaretVisible" Value="True"/>
+    <Setter Property="AcceptsReturn" Value="True"/><Setter Property="AcceptsTab" Value="False"/>
+    <Setter Property="TextWrapping" Value="Wrap"/><Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+    <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+    <Setter Property="Padding" Value="16,12"/><Setter Property="FontSize" Value="19"/>
+    <Setter Property="TextBlock.LineHeight" Value="30"/>
+    <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    <Setter Property="CaretBrush" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    <Setter Property="SelectionBrush" Value="{DynamicResource AccentFillColorSelectedTextBackgroundBrush}"/>
+    <Style.Triggers><Trigger Property="IsKeyboardFocused" Value="True">
+      <Setter Property="BorderBrush" Value="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+      <Setter Property="BorderThickness" Value="2"/>
+    </Trigger></Style.Triggers>
+  </Style>
+  <Style x:Key="BaslikOgesi" TargetType="ListBoxItem">
+    <Setter Property="HorizontalContentAlignment" Value="Stretch"/><Setter Property="Margin" Value="0,0,0,6"/>
+    <Setter Property="Padding" Value="16,12"/>
+    <Setter Property="AutomationProperties.Name" Value="{Binding OkunurAd}"/>
+  </Style>
+  <DataTemplate x:Key="BaslikSablonu"><TextBlock Text="{Binding OkunurAd}" TextWrapping="Wrap" FontSize="18"/></DataTemplate>
+  <Style TargetType="Button"><Setter Property="Padding" Value="16,8"/><Setter Property="Margin" Value="0,0,8,6"/></Style>
+  <Style TargetType="Label"><Setter Property="Padding" Value="2,4,4,6"/></Style>
+</ResourceDictionary>

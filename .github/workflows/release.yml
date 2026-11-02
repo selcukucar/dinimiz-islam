@@ -1,0 +1,45 @@
+name: Windows paketleri
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      - name: Bagimliliklari dogrula
+        run: dotnet restore DinimizIslam.slnx --locked-mode --disable-parallel -m:1
+      - name: Inno Setup
+        shell: pwsh
+        run: |
+          $uri = 'https://github.com/jrsoftware/issrc/releases/download/is-6_7_4/innosetup-6.7.4.exe'
+          Invoke-WebRequest $uri -OutFile "$env:RUNNER_TEMP\inno.exe"
+          $sig = Get-AuthenticodeSignature "$env:RUNNER_TEMP\inno.exe"
+          if ($sig.Status -ne 'Valid' -or $sig.SignerCertificate.Subject -notmatch 'Pyrsys B.V.') { throw 'Inno Setup imzasi dogrulanamadi' }
+          $p = Start-Process "$env:RUNNER_TEMP\inno.exe" -ArgumentList '/VERYSILENT','/SUPPRESSMSGBOXES','/CURRENTUSER','/PORTABLE=1','/NOICONS','/TASKS=',"/DIR=`"$env:RUNNER_TEMP\inno`"" -Wait -PassThru -WindowStyle Hidden
+          if ($p.ExitCode -ne 0) { throw 'Inno Setup hazirlanamadi' }
+      - name: Test ve paketleme
+        shell: pwsh
+        run: |
+          $v = ([xml](Get-Content Directory.Build.props -Raw)).Project.PropertyGroup.Version
+          if ($env:GITHUB_REF_TYPE -eq 'tag' -and $env:GITHUB_REF_NAME -ne "v$v") { throw 'Etiket ve proje surumu farkli' }
+          ./paket/paketle.ps1 -Iscc "$env:RUNNER_TEMP\inno\ISCC.exe"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Windows-paketleri
+          path: |
+            artifacts/*.zip
+            artifacts/*.exe
+            artifacts/SHA256SUMS.txt
+      - name: GitHub surumunu yayinla
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$env:GITHUB_REF_NAME" artifacts/*.zip artifacts/*.exe artifacts/SHA256SUMS.txt --title "Dinimiz İslam $env:GITHUB_REF_NAME" --notes-file CHANGELOG.md --verify-tag

@@ -4,6 +4,8 @@ Windows için C# / .NET 10 WPF okuyucusu. Klavye ile kategori dolaşımı ve sal
 
 ## İndirme ve çalıştırma
 
+[Kurulum dosyasını indir](https://github.com/selcukucar/dinimiz-islam/releases/download/v1.0.2/DinimizIslam-WPF-1.0.2-Kurulum-x64.exe) · [Taşınabilir ZIP indir](https://github.com/selcukucar/dinimiz-islam/releases/download/v1.0.2/DinimizIslam-WPF-1.0.2-Tasinabilir-x64.zip) · [Tüm sürüm dosyaları ve SHA-256](https://github.com/selcukucar/dinimiz-islam/releases/tag/v1.0.2)
+
 Windows 10 2004 (19041) veya daha yeni, x64 gerekir. .NET çalışma zamanı paketin içindedir.
 
 - **Taşınabilir:** `DinimizIslam-WPF-1.0.2-Tasinabilir-x64.zip` arşivini tamamen çıkarıp `DinimizIslam.exe` çalıştırın.
